@@ -35,20 +35,29 @@ def webhook():
     return r
 
 
-def processRequest(req):
-    result = req.get("result")
-    action = result.get("action")
-    parameters = result.get("parameters")
-    if action !="yahooWeatherForecast":
+def processRequest1(req):
+    if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
-    # if req.get("result").get("action") != "yahooWeatherForecast":
-    #     return {}
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
     yql_query = makeYqlQuery(req)
     if yql_query is None:
         return {}
     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
     result = urlopen(yql_url).read()
+    data = json.loads(result)
+    res = makeWebhookResult(data)
+    return res
+
+def proccessRequest(req):
+    rest = req.get("result")
+    action = rest.get("action")
+    parameters = rest.get("parameters")
+    city = parameters.get("geo-city")
+
+    if action !="yahooWeatherForecast":
+        return {}
+    baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&sort_by=popularity.desc"
+    result = urlopen(baseurl).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
     return res
@@ -64,12 +73,40 @@ def makeYqlQuery(req):
 
 
 def makeWebhookResult(data):
-   
+    result = data.get('results')
+    if result is None:
+        return {}
+
+    title = result.get('original_title')
+    if title is None:
+        return {}
+
+   # query = data.get('query')
+   #  if query is None:
+   #      return {}
+
+   #  result = query.get('results')
+   #  if result is None:
+   #      return {}
+
+   #  channel = result.get('channel')
+   #  if channel is None:
+   #      return {}
+
+   #  item = channel.get('item')
+   #  location = channel.get('location')
+   #  units = channel.get('units')
+   #  if (location is None) or (item is None) or (units is None):
+   #      return {}
+
+   #  condition = item.get('condition')
+   #  if condition is None:
+   #      return {}
     # print(json.dumps(item, indent=4))
 
     # speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
     #          ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
-    speech = "Response: "
+    speech = "Movies: " + title
 
     print("Response:")
     print(speech)
