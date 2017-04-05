@@ -35,42 +35,46 @@ def webhook():
     return r
 
 
-def processRequest1(req):
+# def processRequest1(req):
+#     if req.get("result").get("action") != "yahooWeatherForecast":
+#         return {}
+#     baseurl = "https://query.yahooapis.com/v1/public/yql?"
+#     yql_query = makeYqlQuery(req)
+#     if yql_query is None:
+#         return {}
+#     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+#     result = urlopen(yql_url).read()
+#     data = json.loads(result)
+#     res = makeWebhookResult(data)
+#     return res
+
+def processRequest(req):
     if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
-    baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    yql_query = makeYqlQuery(req)
-    if yql_query is None:
-        return {}
-    yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    result = urlopen(yql_url).read()
+    baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91"
+    params = checkParams(req)
+    url = baseurl + params
+    result = urlopen(url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
     return res
 
-def processRequest(req):
-    rest = req.get("result")
+# def makeYqlQuery1(req):
+#     result = req.get("result")
+#     parameters = result.get("parameters")
+#     city = parameters.get("geo-city")
+#     if city is None:
+#         return None
+
+#     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
+
+def checkParams(req):
+    result = req.get("result")
     action = rest.get("action")
     parameters = rest.get("parameters")
     city = parameters.get("geo-city")
-
-    if action !="yahooWeatherForecast":
-        return {}
-    baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&sort_by=popularity.desc"
-    result = urlopen(baseurl).read()
-    data = json.loads(result)
-    res = makeWebhookResult(data)
-    return res
-
-def makeYqlQuery(req):
-    result = req.get("result")
-    parameters = result.get("parameters")
-    city = parameters.get("geo-city")
-    if city is None:
-        return None
-
-    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
-
+    url_params = "&sort_by=popularity.desc"
+    return url_params
 
 def makeWebhookResult(data):
     print ("WEBHOOOKRESULT: ")
@@ -79,15 +83,6 @@ def makeWebhookResult(data):
     total_results = data.get('total_results')
     print("total_results") 
     print (total_results)
-
-    # result = data.get('results')
-    # print ("RESULT: ")
-    # print (result)
-
-    
-    
-    # speech = "Today in " + data.get('total_results') + ": " + condition.get('text') + \
-    #          ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
     speech = "Total Number of Movies Found: " + str(total_results)
 
     print("Response:")
