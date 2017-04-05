@@ -35,7 +35,7 @@ def webhook():
     return r
 
 
-def processRequest1(req):
+def processRequest(req):
     result = req.get("result")
     action = req.get("action")
     parameters = req.get("parameters")
