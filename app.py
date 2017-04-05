@@ -80,7 +80,7 @@ def makeWebhookResult(data):
     print("total_results") 
     print (total_results)
 
-    result = data.get('results').get('original_title')
+    result = data.get('results')
     print ("RESULT: ")
     print (result)
 
