@@ -76,13 +76,17 @@ def makeWebhookResult(data):
     print ("WEBHOOOKRESULT: ")
     print (data)
 
-    result = data.get('results')
+    total_results = data.get('total_results')
+    print("total_results") 
+    print (total_results)
+    
+    # result = data.get('results')
     # print ("RESULT: ")
     # print (result)
 
-    title = result.get('original_title')
-    print ("TITLE: ")
-    print (title)
+    # title = result.get('original_title')
+    # print ("TITLE: ")
+    # print (title)
 
    # query = data.get('query')
    #  if query is None:
