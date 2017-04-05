@@ -36,7 +36,7 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") != "yahooWeatherForecast":
+    if req.get("result").get("action") != "movieTeller":
         return {}
     
     
@@ -59,7 +59,10 @@ def processRequest(req):
 def checkParams(req):
     result = req.get("result")
     parameters = result.get("parameters")
-    city = parameters.get("geo-city")
+    movie = parameters.get("movie")
+
+    print("MOVIE: ")
+    print(movie)
 
     url_params = "&sort_by=popularity.desc"
     return url_params
