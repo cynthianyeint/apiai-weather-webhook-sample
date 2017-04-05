@@ -89,8 +89,8 @@ def makeWebhookResult(data):
     # print (title)
 
     
-    speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
-             ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
+    # speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
+    #          ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
     speech = "Total Number of Movies Found: " + data.get('total_results')
 
     print("Response:")
