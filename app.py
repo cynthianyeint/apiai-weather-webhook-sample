@@ -80,13 +80,12 @@ def processRequest(req):
 
 def checkParams(req):
     result = req.get("result")
-    action = rest.get("action")
-    parameters = rest.get("parameters")
+    parameters = result.get("parameters")
     city = parameters.get("geo-city")
 
     print("CITY:")
     print (city)
-    
+
     url_params = "&sort_by=popularity.desc"
     return url_params
 
