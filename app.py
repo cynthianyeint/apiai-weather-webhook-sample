@@ -48,7 +48,7 @@ def processRequest1(req):
     res = makeWebhookResult(data)
     return res
 
-def proccessRequest(req):
+def processRequest(req):
     rest = req.get("result")
     action = rest.get("action")
     parameters = rest.get("parameters")
