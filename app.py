@@ -73,8 +73,8 @@ def makeYqlQuery(req):
 
 
 def makeWebhookResult(data):
-    # print ("WEBHOOOKRESULT: ")
-    # print (data)
+    print ("WEBHOOOKRESULT: ")
+    print (data)
 
     result = data.get('results')
     # print ("RESULT: ")
