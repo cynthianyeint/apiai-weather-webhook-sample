@@ -73,6 +73,9 @@ def makeYqlQuery(req):
 
 
 def makeWebhookResult(data):
+    print ("WEBHOOOKRESULT: ")
+    print (data)
+
     result = data.get('results')
     if result is None:
         return {}
@@ -80,6 +83,9 @@ def makeWebhookResult(data):
     title = result.get('original_title')
     if title is None:
         return {}
+
+    print ("TITLE: ")
+    print (title)
 
    # query = data.get('query')
    #  if query is None:
@@ -106,7 +112,7 @@ def makeWebhookResult(data):
 
     # speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
     #          ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
-    speech = "Movies: " + title
+    speech = "Speech Response"
 
     print("Response:")
     print(speech)
