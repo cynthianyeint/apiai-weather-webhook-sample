@@ -53,15 +53,19 @@ def processRequest(req):
         return {}
     
     
-    baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&sort_by=popularity.desc"
-    result = urlopen(baseurl).read()
-    data = json.loads(result)
-    res = makeWebhookResult(data)
+    baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91"
+    # result = urlopen(baseurl).read()
+    # data = json.loads(result)
+    # res = makeWebhookResult(data)
 
     params = checkParams(req)
     url = baseurl + params
     print ("URL")
     print (url)
+
+    result = urlopen(url).read()
+    data = json.loads(result)
+    res = makeWebhookResult(data)
 
     return res
 
