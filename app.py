@@ -79,10 +79,14 @@ def processRequest(req):
 #     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
 def checkParams(req):
-    # result = req.get("result")
-    # action = rest.get("action")
-    # parameters = rest.get("parameters")
-    # city = parameters.get("geo-city")
+    result = req.get("result")
+    action = rest.get("action")
+    parameters = rest.get("parameters")
+    city = parameters.get("geo-city")
+
+    print("CITY:")
+    print (city)
+    
     url_params = "&sort_by=popularity.desc"
     return url_params
 
