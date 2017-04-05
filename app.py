@@ -79,10 +79,10 @@ def makeWebhookResult(data):
     total_results = data.get('total_results')
     print("total_results") 
     print (total_results)
-    
-    # result = data.get('results')
-    # print ("RESULT: ")
-    # print (result)
+
+    result = data.get('results').get('original_title')
+    print ("RESULT: ")
+    print (result)
 
     # title = result.get('original_title')
     # print ("TITLE: ")
@@ -113,7 +113,7 @@ def makeWebhookResult(data):
 
     # speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
     #          ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
-    speech = "Response: "
+    speech = "Total Number of Movies Found: " + total_results
 
     print("Response:")
     print(speech)
