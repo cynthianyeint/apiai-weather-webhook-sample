@@ -51,14 +51,18 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
+    
+    
     baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&sort_by=popularity.desc"
+    result = urlopen(baseurl).read()
+    data = json.loads(result)
+    res = makeWebhookResult(data)
+
     params = checkParams(req)
     url = baseurl + params
     print ("URL")
     print (url)
-    result = urlopen(baseurl).read()
-    data = json.loads(result)
-    res = makeWebhookResult(data)
+
     return res
 
 # def makeYqlQuery1(req):
@@ -71,10 +75,10 @@ def processRequest(req):
 #     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
 def checkParams(req):
-    result = req.get("result")
-    action = rest.get("action")
-    parameters = rest.get("parameters")
-    city = parameters.get("geo-city")
+    # result = req.get("result")
+    # action = rest.get("action")
+    # parameters = rest.get("parameters")
+    # city = parameters.get("geo-city")
     url_params = "&sort_by=popularity.desc"
     return url_params
 
