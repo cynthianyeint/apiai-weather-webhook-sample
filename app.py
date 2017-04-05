@@ -88,7 +88,7 @@ def makeWebhookResult(data):
     # print ("TITLE: ")
     # print (title)
 
-    rs = "Num: " + total_results
+    rs = "Num: " + 305417
     print("res:")
     print(rs)
     
