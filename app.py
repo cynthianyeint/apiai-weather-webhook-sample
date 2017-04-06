@@ -40,15 +40,15 @@ def processRequest(req):
         return {}
     
     
-    baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91"
+    baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&"
     # result = urlopen(baseurl).read()
     # data = json.loads(result)
     # res = makeWebhookResult(data)
 
     params = checkParams(req)
     url = baseurl + params
-    print ("URL")
-    print (url)
+    # print ("URL")
+    # print (url)
 
     result = urlopen(url).read()
     data = json.loads(result)
@@ -64,7 +64,14 @@ def checkParams(req):
     print("KEYWORD: ")
     print(keyword)
 
-    url_params = "&sort_by=popularity.desc"
+    if keyword == "popular"
+        url_params  = "sort_by=popularity.desc"
+    elif keyword == "cinemas"
+        url_params = "primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22"
+    elif keyword == "kid"
+        url_params = "certification_country=US&certification.lte=G&sort_by=popularity.desc"
+    else:
+        url_params = "&sort_by=popularity.desc"
     return url_params
 
 def makeWebhookResult(data):
