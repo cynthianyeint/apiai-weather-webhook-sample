@@ -58,10 +58,11 @@ def processRequest(req):
 
 def checkParams(req):
     result = req.get("result")
-    context = result.get("contexts")
     parameters = result.get("parameters")
     keyword = parameters.get("keyword")
-    context_name = context.get("name")
+
+    context = result.get("contexts")
+    # context_name = context.get("name")
 
     print("PARAMETERS: ")
     print (parameters)
@@ -71,7 +72,7 @@ def checkParams(req):
 
     # print ("CONTEXT NAME: ")
     # print(context_name)
-    
+
     print("KEYWORD: ")
     print(keyword)
 
