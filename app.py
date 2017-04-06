@@ -64,11 +64,11 @@ def checkParams(req):
     print("KEYWORD: ")
     print(keyword)
 
-    if keyword == "popular"
+    if keyword == "popular":
         url_params  = "sort_by=popularity.desc"
-    elif keyword == "cinemas"
+    elif keyword == "cinemas":
         url_params = "primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22"
-    elif keyword == "kid"
+    elif keyword == "kid":
         url_params = "certification_country=US&certification.lte=G&sort_by=popularity.desc"
     else:
         url_params = "&sort_by=popularity.desc"
