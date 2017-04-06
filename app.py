@@ -83,7 +83,7 @@ def makeWebhookResult(data):
     # print (total_results)
 
     # speech = "Total Number of Movies Found: " + str(total_results)
-    speech = "We found " + str(total_results) + " movies."
+    speech = "(two-way)We found " + str(total_results) + " movies."
 
     print("Response:")
     print(speech)
