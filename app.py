@@ -69,8 +69,8 @@ def checkParams(req):
     print ("CONTEXT: ")
     print (context)
 
-    print ("CONTEXT NAME: ")
-    print(context_name)
+    # print ("CONTEXT NAME: ")
+    # print(context_name)
     
     print("KEYWORD: ")
     print(keyword)
