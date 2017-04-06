@@ -59,10 +59,10 @@ def processRequest(req):
 def checkParams(req):
     result = req.get("result")
     parameters = result.get("parameters")
-    movie = parameters.get("movie")
+    keyword = parameters.get("keyword")
 
-    print("MOVIE: ")
-    print(movie)
+    print("KEYWORD: ")
+    print(keyword)
 
     url_params = "&sort_by=popularity.desc"
     return url_params
@@ -74,11 +74,12 @@ def makeWebhookResult(data):
     total_results = data.get('total_results')
     # print("total_results") 
     # print (total_results)
+
     speech = "Total Number of Movies Found: " + str(total_results)
 
     print("Response:")
     print(speech)
-    
+
     return {
         "speech": speech,
         "displayText": speech,
