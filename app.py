@@ -23,8 +23,8 @@ app = Flask(__name__)
 def webhook():
     req = request.get_json(silent=True, force=True)
 
-    print("Request:")
-    print(json.dumps(req, indent=4))
+    # print("Request:")
+    # print(json.dumps(req, indent=4))
 
     res = processRequest(req)
 
@@ -68,19 +68,17 @@ def checkParams(req):
     return url_params
 
 def makeWebhookResult(data):
-    print ("WEBHOOOKRESULT: ")
-    print (data)
+    # print ("WEBHOOOKRESULT: ")
+    # print (data)
 
     total_results = data.get('total_results')
-    print("total_results") 
-    print (total_results)
+    # print("total_results") 
+    # print (total_results)
     speech = "Total Number of Movies Found: " + str(total_results)
 
     print("Response:")
     print(speech)
-
-
-
+    
     return {
         "speech": speech,
         "displayText": speech,
