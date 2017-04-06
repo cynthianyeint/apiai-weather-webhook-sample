@@ -61,7 +61,7 @@ def checkParams(req):
     context = result.get("contexts")
     parameters = result.get("parameters")
     keyword = parameters.get("keyword")
-    # context_name = context.get("name")
+    context_name = context.get("name")
 
     print("PARAMETERS: ")
     print (parameters)
@@ -69,8 +69,8 @@ def checkParams(req):
     print ("CONTEXT: ")
     print (context)
 
-    # print ("CONTEXT NAME: ")
-    # print(context_name)
+    print ("CONTEXT NAME: ")
+    print(context_name)
     
     print("KEYWORD: ")
     print(keyword)
