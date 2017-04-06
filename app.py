@@ -61,7 +61,7 @@ def checkParams(req):
     parameters = result.get("parameters")
     keyword = parameters.get("keyword")
 
-    context = result.get("contexts")
+    context = result.get("contexts")[0]
     # context_name = context.get("name")
 
     print("PARAMETERS: ")
