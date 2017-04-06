@@ -23,11 +23,8 @@ app = Flask(__name__)
 def webhook():
     req = request.get_json(silent=True, force=True)
 
-    print("Request1:")
+    print("Request: ")
     print(json.dumps(req, indent=4))
-
-    print("Request:")
-    print(json.dumps(req))
 
     res = processRequest(req)
 
@@ -61,8 +58,15 @@ def processRequest(req):
 
 def checkParams(req):
     result = req.get("result")
+    context = req.get("name")
     parameters = result.get("parameters")
     keyword = parameters.get("keyword")
+
+    print("PARAMETERS: ")
+    print (parameters)
+
+    print ("CONTEXT: ")
+    print (context)
 
     print("KEYWORD: ")
     print(keyword)
