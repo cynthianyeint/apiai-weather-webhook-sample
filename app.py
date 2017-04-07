@@ -61,8 +61,8 @@ def checkParams(req):
     parameters = result.get("parameters")
     keyword = parameters.get("keyword")
 
-    context = result.get("contexts")[0]
-    context_name = context.get("name")
+    # context = result.get("contexts")[0]
+    # context_name = context.get("name")
 
     print("PARAMETERS: ")
     print (parameters)
@@ -95,7 +95,7 @@ def makeWebhookResult(data):
     # print (total_results)
 
     # speech = "Total Number of Movies Found: " + str(total_results)
-    speech = "(two-way)We found " + str(total_results) + " movies."
+    speech = "(two-way-new)We found " + str(total_results) + " movies."
 
     print("Response:")
     print(speech)
