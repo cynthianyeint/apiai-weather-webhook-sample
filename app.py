@@ -41,18 +41,12 @@ def processRequest(req):
     
     
     baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&"
-    # result = urlopen(baseurl).read()
-    # data = json.loads(result)
-    # res = makeWebhookResult(data)
-
     params = checkParams(req)
     url = baseurl + params
-    # print ("URL")
-    # print (url)
-
+    
     result = urlopen(url).read()
     data = json.loads(result)
-    res = makeWebhookResult(data)
+    res = makeWebhookResult(req, data)
 
     return res
 
@@ -86,16 +80,11 @@ def checkParams(req):
         url_params = "&sort_by=popularity.desc"
     return url_params
 
-def makeWebhookResult(data):
-    # print ("WEBHOOOKRESULT: ")
-    # print (data)
-
+def makeWebhookResult(req, data):
+    
     total_results = data.get('total_results')
-    # print("total_results") 
-    # print (total_results)
-
-    # speech = "Total Number of Movies Found: " + str(total_results)
-    speech = "(two-way-new)We found " + str(total_results) + " movies."
+    
+    speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
 
     print("Response:")
     print(speech)
