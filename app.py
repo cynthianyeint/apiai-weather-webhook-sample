@@ -110,8 +110,7 @@ def makeWebhookResult(req, data):
 
         senti_data = json.loads(buffer.getvalue())
 
-        speech = "Testing Sentiment : " + req.get("result").get("resolvedQuery") + 
-                    " Result: "  + senti_data["label"]
+        speech = "Testing Sentiment : " + req.get("result").get("resolvedQuery") + " Result: "  + senti_data["label"]
 
     else:
         speech = "Wrong Action"
