@@ -36,8 +36,8 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") != "movieTeller":
-        return {}
+    # if req.get("result").get("action") != "movieTeller":
+    #     return {}
     
     
     baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&"
@@ -55,20 +55,20 @@ def checkParams(req):
     parameters = result.get("parameters")
     keyword = parameters.get("keyword")
 
-    context = result.get("contexts")[0]
-    context_name = context.get("name")
+    # context = result.get("contexts")[0]
+    # context_name = context.get("name")
 
-    print("PARAMETERS: ")
-    print (parameters)
+    # print("PARAMETERS: ")
+    # print (parameters)
 
-    print ("CONTEXT: ")
-    print (context)
+    # print ("CONTEXT: ")
+    # print (context)
 
-    print ("CONTEXT NAME: ")
-    print(context_name)
+    # print ("CONTEXT NAME: ")
+    # print(context_name)
 
-    print("KEYWORD: ")
-    print(keyword)
+    # print("KEYWORD: ")
+    # print(keyword)
 
     if keyword == "popular":
         url_params  = "sort_by=popularity.desc"
@@ -84,7 +84,14 @@ def makeWebhookResult(req, data):
     
     total_results = data.get('total_results')
     
-    speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
+    if req.get("result").get("action") == "movieTeller":
+        speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
+    elif req.get("result").get("action") == "sentimentTeller":
+        speech = "Testing Sentiment"
+    else:
+        speech = "Wrong Action"
+
+    # speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
 
     print("Response:")
     print(speech)
