@@ -89,7 +89,7 @@ def makeWebhookResult(req, data):
     if req.get("result").get("action") == "movieTeller":
         speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
     elif req.get("result").get("action") == "sentimentTeller":
-        speech = "Testing Sentiment"
+        speech = "Testing Sentiment" + req.get("result").get("resolvedQuery")
     else:
         speech = "Wrong Action"
 
