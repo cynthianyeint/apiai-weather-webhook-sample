@@ -101,13 +101,10 @@ def makeWebhookResult(req, data):
         post_data = {'text': 'boring'}
         postfields = urlencode(post_data)
         c.setopt(c.POSTFIELDS, postfields)
-        # senti_data = c.perform()
-        speech = "Testing Sentiment: " + c.perform()
+        senti_data = c.perform()
         c.close()
 
-
-
-        # speech = "Testing Sentiment " + req.get("result").get("resolvedQuery")
+        speech = "Testing Sentiment " + req.get("result").get("resolvedQuery")
 
     else:
         speech = "Wrong Action"
