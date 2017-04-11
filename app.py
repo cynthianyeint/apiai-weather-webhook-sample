@@ -90,10 +90,10 @@ def makeWebhookResult(req, data):
         speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
     elif req.get("result").get("action") == "sentimentTeller":
         senti_text = {'text':'boring'}
-        senti_data = request.post("http://text-processing.com/api/sentiment/", 
-                                    body=senti_text, )
+        senti_data = request.POST("http://text-processing.com/api/sentiment/", 
+                                    body=senti_text)
         print("senti_data: ")
-        print (senti_data)
+        # print (senti_data)
         speech = "Testing Sentiment " + req.get("result").get("resolvedQuery")
     else:
         speech = "Wrong Action"
