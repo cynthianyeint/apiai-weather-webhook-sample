@@ -98,7 +98,7 @@ def makeWebhookResult(req, data):
 
         c = pycurl.Curl()
         c.setopt(c.URL, 'http://text-processing.com/api/sentiment/')
-        post_data = {'text': 'boring'}
+        post_data = {'text': req.get("result").get("resolvedQuery")}
         postfields = urlencode(post_data)
         c.setopt(c.POSTFIELDS, postfields)
         senti_data = c.perform()
