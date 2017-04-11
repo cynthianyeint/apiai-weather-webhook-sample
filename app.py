@@ -16,10 +16,16 @@ from flask import request
 from flask import make_response
 
 import nltk
+import pycurl
+try:
+    # python 3
+    from urllib.parse import urlencode
+except ImportError:
+    # python 2
+    from urllib import urlencode
 
 # Flask app should start in global layout
 app = Flask(__name__)
-
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -89,11 +95,17 @@ def makeWebhookResult(req, data):
     if req.get("result").get("action") == "movieTeller":
         speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
     elif req.get("result").get("action") == "sentimentTeller":
-        senti_text = {'text':'boring'}
-        senti_data = request.POST("http://text-processing.com/api/sentiment/", 
-                                    body=senti_text)
-        print("senti_data: ")
-        # print (senti_data)
+
+        c = pycurl.Curl()
+        c.setopt(c.URL, 'http://text-processing.com/api/sentiment/')
+        post_data = {'text': 'boring'}
+        postfields = urlencode(post_data)
+        c.setopt(c.POSTFIELDS, postfields)
+        senti_data = c.perform()
+        print ("senti_data: ")
+        pritn (senti_data)
+        c.close()
+
         speech = "Testing Sentiment " + req.get("result").get("resolvedQuery")
     else:
         speech = "Wrong Action"
