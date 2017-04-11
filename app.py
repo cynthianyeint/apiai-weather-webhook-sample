@@ -17,6 +17,8 @@ from flask import make_response
 
 import nltk
 import pycurl
+from StringIO import StringIO as BytesIO
+
 try:
     # python 3
     from urllib.parse import urlencode
@@ -96,15 +98,20 @@ def makeWebhookResult(req, data):
         speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
     elif req.get("result").get("action") == "sentimentTeller":
 
+        buffer = BytesIO()
         c = pycurl.Curl()
         c.setopt(c.URL, 'http://text-processing.com/api/sentiment/')
         post_data = {'text': req.get("result").get("resolvedQuery")}
         postfields = urlencode(post_data)
         c.setopt(c.POSTFIELDS, postfields)
-        senti_data = c.perform()
+        c.setopt(c.WRITEDATA, buffer)
+        c.perform()
         c.close()
 
-        speech = "Testing Sentiment " + req.get("result").get("resolvedQuery")
+        senti_data = json.loads(buffer.getvalue())
+
+        speech = "Testing Sentiment : " + req.get("result").get("resolvedQuery") + 
+                    " Result: "  + senti_data["label"]
 
     else:
         speech = "Wrong Action"
