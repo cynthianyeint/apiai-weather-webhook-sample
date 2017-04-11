@@ -16,7 +16,6 @@ from flask import request
 from flask import make_response
 
 import nltk
-import requests
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -91,7 +90,7 @@ def makeWebhookResult(req, data):
         speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
     elif req.get("result").get("action") == "sentimentTeller":
         senti_text = {'text':'boring'}
-        senti_data = requests.post("http://text-processing.com/api/sentiment/", 
+        senti_data = request.post("http://text-processing.com/api/sentiment/", 
                                     body=senti_text, )
         print("senti_data: ")
         print (senti_data)
