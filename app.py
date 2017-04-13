@@ -38,7 +38,7 @@ def webhook():
 def processRequest(req):
     # if req.get("result").get("action") != "movieTeller":
     #     return {}
-    
+
     baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&"
     params = checkParams(req)
     url = baseurl + params
@@ -82,9 +82,13 @@ def checkParams(req):
 def makeWebhookResult(req, data):
     
     total_results = data.get('total_results')
-    
-    
-    speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
+    if req.get("result").get("action") == "movieTeller":
+        speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
+    elif req.get("result").get("action") == "movieOption":
+        speech = "Movie Option"
+    else:
+        speech = "Error!!"
+
 
     print("Response:")
     print(speech)
