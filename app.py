@@ -39,7 +39,6 @@ def processRequest(req):
     # if req.get("result").get("action") != "movieTeller":
     #     return {}
     
-    
     baseurl = "https://api.themoviedb.org/3/discover/movie?api_key=a6669e892c1628955e0af913f38dbb91&"
     params = checkParams(req)
     url = baseurl + params
@@ -55,20 +54,20 @@ def checkParams(req):
     parameters = result.get("parameters")
     keyword = parameters.get("keyword")
 
-    # context = result.get("contexts")[0]
-    # context_name = context.get("name")
+    context = result.get("contexts")[0]
+    context_name = context.get("name")
 
-    # print("PARAMETERS: ")
-    # print (parameters)
+    print("PARAMETERS: ")
+    print (parameters)
 
-    # print ("CONTEXT: ")
-    # print (context)
+    print ("CONTEXT: ")
+    print (context)
 
-    # print ("CONTEXT NAME: ")
-    # print(context_name)
+    print ("CONTEXT NAME: ")
+    print(context_name)
 
-    # print("KEYWORD: ")
-    # print(keyword)
+    print("KEYWORD: ")
+    print(keyword)
 
     if keyword == "popular":
         url_params  = "sort_by=popularity.desc"
