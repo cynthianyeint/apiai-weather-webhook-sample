@@ -15,16 +15,6 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-import nltk
-import pycurl
-from StringIO import StringIO as BytesIO
-
-try:
-    # python 3
-    from urllib.parse import urlencode
-except ImportError:
-    # python 2
-    from urllib import urlencode
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -94,28 +84,8 @@ def makeWebhookResult(req, data):
     
     total_results = data.get('total_results')
     
-    if req.get("result").get("action") == "movieTeller":
-        speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
-    elif req.get("result").get("action") == "sentimentTeller":
-
-        buffer = BytesIO()
-        c = pycurl.Curl()
-        c.setopt(c.URL, 'http://text-processing.com/api/sentiment/')
-        post_data = {'text': req.get("result").get("resolvedQuery")}
-        postfields = urlencode(post_data)
-        c.setopt(c.POSTFIELDS, postfields)
-        c.setopt(c.WRITEDATA, buffer)
-        c.perform()
-        c.close()
-
-        senti_data = json.loads(buffer.getvalue())
-
-        speech = "Testing Sentiment : " + req.get("result").get("resolvedQuery") + " Result: "  + senti_data["label"]
-
-    else:
-        speech = "Wrong Action"
-
-    # speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
+    
+    speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
 
     print("Response:")
     print(speech)
