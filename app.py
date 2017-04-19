@@ -51,11 +51,15 @@ def processRequest(req):
 
 def checkParams(req):
     result = req.get("result")
+    action = result.get("action")
     parameters = result.get("parameters")
     keyword = parameters.get("keyword")
 
     context = result.get("contexts")[0]
     context_name = context.get("name")
+
+    print ("RESOLVED QUERY")
+    print (result.get("resolvedQuery"))
 
     print("PARAMETERS: ")
     print (parameters)
@@ -81,7 +85,16 @@ def checkParams(req):
 
 def makeWebhookResult(req, data):
     
+    result = req.get("result")
+    action = result.get("action")
+    parameters = result.get("parameters")
+    keyword = parameters.get("keyword")
+
+    context = result.get("contexts")[0]
+    context_name = context.get("name")
+
     total_results = data.get('total_results')
+
     if req.get("result").get("action") == "movieTeller":
         speech = req.get("result").get("action") + "(two-way-new)We found " + str(total_results) + " movies."
     elif req.get("result").get("action") == "movieOption":
